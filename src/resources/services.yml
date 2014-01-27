@@ -6,5 +6,9 @@ services:
     thinframe.logger.factory:
         class: 'ThinFrame\Monolog\LoggerFactory'
 
+    thinframe.logger.handlers.null:
+        class: 'Monolog\Handler\NullHandler'
+
 thinframe.logger:
     handlers:
+      - 'thinframe.logger.handlers.null'
