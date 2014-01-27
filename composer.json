@@ -1,0 +1,32 @@
+{
+    "name": "thinframe/monolog",
+    "type": "library",
+    "homepage": "http://thinframe.net",
+    "description": "Monolog Application",
+    "keywords": ["thinframe", "monolog", "logger"],
+    "license": "MIT",
+    "support": {
+        "issues": "https://github.com/thinframe/monolog/issues"
+    },
+    "require": {
+        "monolog/monolog": "@stable",
+        "thinframe/applications": "@stable"
+    },
+    "authors": [
+        {
+            "name": "Sorin Badea",
+            "email": "sorin.badea91@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {
+            "ThinFrame\\Monolog\\": "src/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1-dev"
+        }
+    }
+}

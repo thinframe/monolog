@@ -1,0 +1,10 @@
+services:
+    thinframe.logger:
+        class: 'Monolog\Logger'
+        factory_service: 'thinframe.logger.factory'
+        factory_method: 'createLogger'
+    thinframe.logger.factory:
+        class: 'ThinFrame\Monolog\LoggerFactory'
+
+thinframe.logger:
+    handlers:

@@ -1,0 +1,1 @@
+#ThinFrame Monolog Application
