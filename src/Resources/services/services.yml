@@ -1,0 +1,6 @@
+services:
+    logger:
+        class: 'Monolog\Logger'
+
+    logger.handlers.null:
+        class: 'Monolog\Handler\NullHandler'

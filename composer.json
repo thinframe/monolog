@@ -10,7 +10,7 @@
     },
     "require": {
         "monolog/monolog": "@stable",
-        "thinframe/applications": "@stable"
+        "thinframe/applications": "dev-develop"
     },
     "authors": [
         {
@@ -18,7 +18,7 @@
             "email": "sorin.badea91@gmail.com"
         }
     ],
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
             "ThinFrame\\Monolog\\": "src/"
