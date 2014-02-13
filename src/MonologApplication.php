@@ -12,6 +12,8 @@ namespace ThinFrame\Monolog;
 use PhpCollection\Map;
 use ThinFrame\Applications\AbstractApplication;
 use ThinFrame\Applications\DependencyInjection\ContainerConfigurator;
+use ThinFrame\Applications\DependencyInjection\InterfaceInjectionRule;
+use ThinFrame\Applications\DependencyInjection\TraitInjectionRule;
 
 /**
  * Class MonologApplication
@@ -52,7 +54,9 @@ class MonologApplication extends AbstractApplication
             ->addResource('Resources/services/services.yml')
             ->addResource('Resources/services/config.yml')
             ->addExtension($hybridExtension = new MonologHybridExtension())
-            ->addCompilerPass($hybridExtension);
+            ->addCompilerPass($hybridExtension)
+            ->addInjectionRule(new TraitInjectionRule('Psr\Log\LoggerAwareTrait', 'logger', 'setLogger'))
+            ->addInjectionRule(new InterfaceInjectionRule('\Psr\Log\LoggerAwareInterface', 'logger', 'setLogger'));
     }
 
     /**

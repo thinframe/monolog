@@ -35,7 +35,7 @@ class MonologConfiguration implements ConfigurationInterface
             ->children()
             ->scalarNode('logger_name')->isRequired()->end()
             ->scalarNode('logger_service')->isRequired()->end()
-            ->arrayNode('handlers')->isRequired()->requiresAtLeastOneElement()
+            ->arrayNode('handlers')->isRequired()
             ->prototype('array')->children()
             ->scalarNode('service')->isRequired()->end()
             ->end()
