@@ -51,8 +51,8 @@ class MonologApplication extends AbstractApplication
     protected function setConfiguration(ContainerConfigurator $configurator)
     {
         $configurator
-            ->addResource('Resources/services/services.yml')
-            ->addResource('Resources/services/config.yml')
+            ->addResource('Resources/config/services.yml')
+            ->addResource('Resources/config/config.yml')
             ->addExtension($hybridExtension = new MonologHybridExtension())
             ->addCompilerPass($hybridExtension)
             ->addInjectionRule(new TraitInjectionRule('Psr\Log\LoggerAwareTrait', 'logger', 'setLogger'))
