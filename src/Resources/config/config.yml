@@ -1,5 +1,3 @@
 monolog:
     logger_name: 'thinframe'
     logger_service: 'logger'
-    handlers:
-      - { service: 'logger.handlers.null' }
