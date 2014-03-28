@@ -42,6 +42,9 @@ class MonologHybridExtension implements ExtensionInterface, CompilerPassInterfac
         foreach ($this->config['handlers'] as $handler) {
             $loggerServiceDefinition->addMethodCall('pushHandler', [new Reference($handler['service'])]);
         }
+        foreach ($this->config['processors'] as $processor) {
+            $loggerServiceDefinition->addMethodCall('pushProcessor', [new Reference($processor['service'])]);
+        }
     }
 
 

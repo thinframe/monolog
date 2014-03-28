@@ -33,14 +33,18 @@ class MonologConfiguration implements ConfigurationInterface
 
         $rootNode
             ->children()
-            ->scalarNode('logger_name')->isRequired()->end()
-            ->scalarNode('logger_service')->isRequired()->end()
-            ->arrayNode('handlers')->isRequired()
-            ->prototype('array')->children()
-            ->scalarNode('service')->isRequired()->end()
-            ->end()
-            ->end()
-            ->end()
+                ->scalarNode('logger_name')->isRequired()->end()
+                ->scalarNode('logger_service')->isRequired()->end()
+                ->arrayNode('handlers')->isRequired()
+                    ->prototype('array')->children()
+                        ->scalarNode('service')->isRequired()->end()
+                    ->end()
+                ->end()->end()
+                ->arrayNode('processors')->isRequired()
+                    ->prototype('array')->children()
+                        ->scalarNode('service')->isRequired()->end()
+                    ->end()
+                ->end()->end()
             ->end();
 
         return $treeBuilder;
