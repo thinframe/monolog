@@ -1,0 +1,6 @@
+services:
+    logger:
+        class: '%logger.class%'
+
+    logger.handlers.null:
+        class: '%logger.handlers.null.class%'

@@ -3,16 +3,17 @@
 /**
  * src/MonologApplication.php
  *
- * @copyright 2013 Sorin Badea <sorin.badea91@gmail.com>
+ * @author    Sorin Badea <sorin.badea91@gmail.com>
  * @license   MIT license (see the license file in the root directory)
  */
 
 namespace ThinFrame\Monolog;
 
+use PhpCollection\Map;
 use ThinFrame\Applications\AbstractApplication;
-use ThinFrame\Applications\DependencyInjection\AwareDefinition;
 use ThinFrame\Applications\DependencyInjection\ContainerConfigurator;
-use ThinFrame\Applications\DependencyInjection\Extensions\ConfigurationManager;
+use ThinFrame\Applications\DependencyInjection\InterfaceInjectionRule;
+use ThinFrame\Applications\DependencyInjection\TraitInjectionRule;
 
 /**
  * Class MonologApplication
@@ -23,51 +24,49 @@ use ThinFrame\Applications\DependencyInjection\Extensions\ConfigurationManager;
 class MonologApplication extends AbstractApplication
 {
     /**
-     * Get parent applications
-     *
-     * @return AbstractApplication[]
-     */
-    protected function getParentApplications()
-    {
-        return [];
-    }
-
-    /**
-     * initialize configurator
-     *
-     * @param ContainerConfigurator $configurator
-     *
-     * @return mixed
-     */
-    public function initializeConfigurator(ContainerConfigurator $configurator)
-    {
-        $configurator->addAwareDefinition(
-            new AwareDefinition('\Psr\Log\LoggerAwareTrait', 'setLogger', 'thinframe.logger')
-        );
-        $configurator->addConfigurationManager(
-            new ConfigurationManager('thinframe.logger', 'thinframe.logger.factory')
-        );
-    }
-
-    /**
-     * Get configuration files
-     *
-     * @return mixed
-     */
-    public function getConfigurationFiles()
-    {
-        return [
-            'resources/services.yml'
-        ];
-    }
-
-    /**
      * Get application name
      *
      * @return string
      */
-    public function getApplicationName()
+    public function getName()
     {
-        return 'MonologApplication';
+        return $this->reflector->getShortName();
+    }
+
+    /**
+     * Get application parents
+     *
+     * @return AbstractApplication[]
+     */
+    public function getParents()
+    {
+        // noop
+    }
+
+    /**
+     * Set different options for the container configurator
+     *
+     * @param ContainerConfigurator $configurator
+     */
+    protected function setConfiguration(ContainerConfigurator $configurator)
+    {
+        $configurator
+            ->addResource('Resources/config/services.yml')
+            ->addResource('Resources/config/config.yml')
+            ->addExtension($hybridExtension = new MonologHybridExtension())
+            ->addCompilerPass($hybridExtension)
+            ->addInjectionRule(new TraitInjectionRule('Psr\Log\LoggerAwareTrait', 'logger', 'setLogger'))
+            ->addInjectionRule(new InterfaceInjectionRule('\Psr\Log\LoggerAwareInterface', 'logger', 'setLogger'));
+    }
+
+    /**
+     * Set application metadata
+     *
+     * @param Map $metadata
+     *
+     */
+    protected function setMetadata(Map $metadata)
+    {
+        // noop
     }
 }

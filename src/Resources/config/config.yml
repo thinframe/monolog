@@ -1,0 +1,7 @@
+monolog:
+    logger_name: 'thinframe'
+    logger_service: 'logger'
+
+parameters:
+    logger.class: 'Monolog\Logger'
+    logger.handlers.null.class: 'Monolog\Handler\NullHandler'
